@@ -1,0 +1,5 @@
+make all --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/leonexxe/code/JSIS'
+clang++ ./src/main.cpp -o ./bin/JSIS -std=c++20
+make: Leaving directory `/Users/leonexxe/code/JSIS'
+ 
