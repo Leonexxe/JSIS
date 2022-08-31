@@ -70,5 +70,7 @@ int main(int argc, char** argv)
     std::cout << "[INFO] placing in preprocessor variables..." << std::endl;
     string fCode = placePPvars(code);
     std::cout << "final code " << std::endl << fCode << std::endl;
+    std::cout << "running compiler..." << std::endl;
+    u64* INSTR = compile(fCode);
     return 0;
 }

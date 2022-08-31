@@ -81,5 +81,6 @@
             "binaryPath": "/Users/leonexxe/code/JSIS/bin/JSIS",
             "binaryArgs": []
         }
-    ]
+    ],
+    "C_Cpp.errorSquiggles": "Disabled"
 }

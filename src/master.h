@@ -23,6 +23,7 @@ typedef std::string string;
 
 void preproc(std::string* fc, string code);
 void preProcLine(std::string* fc, string line);
+string strReplace(string& str,string target, string replacement,u64* rCounter = nullptr,bool editStringLiterals = 0);
 
 list<string> sysLibFolders = {"/usr/local/JSIS/","C:\\JSIS\\"};
 std::string outputFile = "";
@@ -30,3 +31,4 @@ std::string inputFile = "";
 
 #include "util.cpp"
 #include "preproc.cpp"
+#include "compile.cpp"

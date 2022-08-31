@@ -34,7 +34,7 @@ void preProcLine(string* fc, string line)
         fc->append(line);
         return;
     }
-    list<string> tokens = strSplit(line," ",0);
+    list<string> tokens = strSplit(line," ",0,1);
     if(tokens[0] == "#define")
     {
         if(tokens.size() < 3)
@@ -88,7 +88,7 @@ void preProcLine(string* fc, string line)
 void preproc(std::string* fc, string code)
 {
     std::cout << "[INFO] preprocessing file: " << PPfileStack.back() << std::endl;
-    list<string> lines = strSplit(code,";",1);
+    list<string> lines = strSplit(code,";",1,0);
     for(string I : lines)
         preProcLine(fc,I);
     PPfileStack.pop_back();
@@ -100,7 +100,7 @@ string placePPvars(string& code)
     u64 rc;
     for(int I = 0;I<defined.size();I++)
     {
-        r = strReplace(r,defined[I].name,defined[I].value,&rc);
+        r = strReplace(r,defined[I].name,defined[I].value,&rc,1);
         std::cout << "found " << rc << " use(s) of " << defined[I].name << std::endl;
     }
     return r;
