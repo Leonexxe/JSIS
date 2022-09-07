@@ -79,15 +79,39 @@ u64 assGetSettable(string name)
 
 u64 assGetEVal(string name)
 {
+    //specific registers
     if(name == "rv")    return 0;
-    assError("stack not found \""+name+"\" !");
+    //general purpose registers
+    if(name == "rax")  return 0x10;
+    if(name == "rbx")  return 0x11;
+    if(name == "rcx")  return 0x12;
+    if(name == "rdx")  return 0x13;
+    if(name == "rex")  return 0x14;
+    if(name == "rfx")  return 0x15;
+    if(name == "rgx")  return 0x16;
+    if(name == "rhx")  return 0x17;
+    if(name == "rix")  return 0x18;
+    if(name == "rjx")  return 0x19;
+    if(name == "rkx")  return 0x1A;
+    if(name == "rlx")  return 0x1B;
+    if(name == "rmx")  return 0x1C;
+    if(name == "rox")  return 0x1D;
+    if(name == "rpx")  return 0x1E;
+    if(name == "rqx")  return 0x1F;
+    assError("register not found \""+name+"\" !");
 }
 
 u64 assGetStack(string name)
 {
-    if(name == "ret")   return 0;
-    if(name == "rv")    return 1;
-    if(name == "this")  return 2;
+    //specific stacks
+    if(name == "ret")   return 0x0;
+    if(name == "rv")    return 0x1;
+    if(name == "this")  return 0x2;
+    //general purpose stacks
+    if(name == "sax")  return 0x10;
+    if(name == "sbx")  return 0x11;
+    if(name == "scx")  return 0x12;
+    if(name == "sdx")  return 0x13;
     assError("stack not found \""+name+"\" !");
 }
 
