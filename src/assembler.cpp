@@ -66,14 +66,20 @@ u64 sti(string s)
 
 u64 assGetArray(string name)
 {
+    //local arrays
     if(name == "args")   return 0;
+    //global arrays
+
     assError("Array not found \""+name+"\" !");
 }
 
 u64 assGetSettable(string name)
 {
+    //local values
     if(name == "EOO")   return 0;
     if(name == "AAS")   return 0;
+    //global values
+
     assError("settable not found \""+name+"\" !");
 }
 
@@ -98,6 +104,23 @@ u64 assGetEVal(string name)
     if(name == "rox")  return 0x1D;
     if(name == "rpx")  return 0x1E;
     if(name == "rqx")  return 0x1F;
+    //global gp registers
+    if(name == "gax")  return 0x20;
+    if(name == "gbx")  return 0x21;
+    if(name == "gcx")  return 0x22;
+    if(name == "gdx")  return 0x23;
+    if(name == "gex")  return 0x24;
+    if(name == "gfx")  return 0x25;
+    if(name == "ggx")  return 0x26;
+    if(name == "ghx")  return 0x27;
+    if(name == "gix")  return 0x28;
+    if(name == "gjx")  return 0x29;
+    if(name == "gkx")  return 0x2A;
+    if(name == "glx")  return 0x2B;
+    if(name == "gmx")  return 0x2C;
+    if(name == "gox")  return 0x2D;
+    if(name == "gpx")  return 0x2E;
+    if(name == "gqx")  return 0x2F;
     assError("register not found \""+name+"\" !");
 }
 
@@ -108,14 +131,23 @@ u64 assGetStack(string name)
     if(name == "rv")    return 0x1;
     if(name == "this")  return 0x2;
     //general purpose stacks
-    if(name == "sax")  return 0x10;
-    if(name == "sbx")  return 0x11;
-    if(name == "scx")  return 0x12;
-    if(name == "sdx")  return 0x13;
-    if(name == "sex")  return 0x14;//i couldn't not
-    if(name == "sfx")  return 0x15;
-    if(name == "sgx")  return 0x16;
-    if(name == "shx")  return 0x17;
+    if(name == "sax")   return 0x10;
+    if(name == "sbx")   return 0x11;
+    if(name == "scx")   return 0x12;
+    if(name == "sdx")   return 0x13;
+    if(name == "sex")   return 0x14;//i couldn't not
+    if(name == "sfx")   return 0x15;
+    if(name == "sgx")   return 0x16;
+    if(name == "shx")   return 0x17;
+    //global gp stacks
+    if(name == "gax")   return 0x18;
+    if(name == "gbx")   return 0x19;
+    if(name == "gcx")   return 0x1A;
+    if(name == "gdx")   return 0x1B;
+    if(name == "gex")   return 0x1C;
+    if(name == "gfx")   return 0x1D;
+    if(name == "ggx")   return 0x1E;
+    if(name == "ghx")   return 0x1F;
     assError("stack not found \""+name+"\" !");
 }
 
