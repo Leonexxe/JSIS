@@ -112,6 +112,10 @@ u64 assGetStack(string name)
     if(name == "sbx")  return 0x11;
     if(name == "scx")  return 0x12;
     if(name == "sdx")  return 0x13;
+    if(name == "sex")  return 0x14;//i couldn't not
+    if(name == "sfx")  return 0x15;
+    if(name == "sgx")  return 0x16;
+    if(name == "shx")  return 0x17;
     assError("stack not found \""+name+"\" !");
 }
 
