@@ -1,0 +1,78 @@
+##############################################################################################################
+# File: /Users/leonexxe/code/JSIS/src/old.txt                                                                #
+# Project: /Users/leonexxe/code/JSIS/src                                                                     #
+# Created Date: Wednesday, September 7th 2022, 4:33:47 am                                                    #
+# Author: Leonexxe (Leon Marcellus Nitschke-Höfer)                                                           #
+# -----                                                                                                      #
+# Copyright (c) 2022 Leon Marcellus Nitschke-Höfer (Leonexxe)                                                #
+# -----                                                                                                      #
+# You may not remove or alter this copyright header.                                                         #
+##############################################################################################################
+list<string> subTokens = strSplit(tokens[0],".",0,0);
+    if(subTokens.size() == 1)
+    {
+    }
+    string internalNameSpace = "";
+
+    bool hasTargetObj = false;
+
+    u64 rObj = 0;
+    u64 rObjT = 0;
+    u64 tObj = 0;
+    u64 tObjT = 0;
+    u64 vObj = 0;
+    u64 vObjT = 0;
+    u64 I = 0;
+    if(!hasTargetObj)
+    {
+        rObj = addVar("_var_"+std::to_string(objNumber),getType("void"));
+        goto _5_skip;
+    }
+
+    _4_startLoop: ;
+    rObj = resolveSymbol(subTokens[I]);
+    rObjT = getTypeOf(tObj);
+    vObj = resolveSymbol(subTokens[I+1]);
+    vObjT = getTypeOf(vObj);
+    _5_skip: ;
+    if(!(I<subTokens.size()-1))
+        goto _4_endLoop;
+    I++;
+    //loop begin
+    {
+        if(rObjT != vObjT)
+            std::cout << "can't assign value of type " << getObjName(vObjT) << " to variable of type " << getObjName(rObjT) << std::endl;
+        if(subTokens[I+1].back() == ')')
+        {
+            list<string> tArgs = strSplit(tokens[1],",",0,0);
+            list<var> args;
+            for(string I : tArgs)
+            {
+                if(isLiteral(I))
+                {
+                    addVar("_var_"+std::to_string(objNumber),LLType);
+                    args.push_back(vars.back());
+                }
+                else
+                {
+                    u64 v = resolveSymbol(I);
+                    if(objects[v].ot == _type)
+                        std::cout << "[ERROR] can't pass type as argument to a function! at " << getCodePos() << std::endl;
+
+                    if(objects[v].ot == _function)
+                    {
+                    }
+
+                    if(objects[v].ot == _variable)
+                    {
+                        args.push_back(vars[objects[v].subNumber]);
+                    }
+                }
+            }
+            genFunctionCall(rObj,tObj,getObjName(vObj),&args);
+        }
+        genValueAssign(rObj,vObj);
+    }
+    //loop end
+    goto _4_startLoop;
+    _4_endLoop: ;

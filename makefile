@@ -9,4 +9,4 @@
 # You may not remove or alter this copyright header.                                                         #
 ##############################################################################################################
 all:
-	clang++ ./src/main.cpp -o ./bin/JSIS -std=c++20
+	clang++ ./src/main.cpp -o ./bin/JSIS -std=c++20 -Wno-return-type -g3

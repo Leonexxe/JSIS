@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <fstream>
 #include <string>
+#include <cstdio>
 #include <sys/stat.h>
 
 template<typename T>
@@ -29,6 +30,8 @@ list<string> sysLibFolders = {"/usr/local/JSIS/","C:\\JSIS\\"};
 std::string outputFile = "";
 std::string inputFile = "";
 
+#include "flags.hpp"
 #include "util.cpp"
 #include "preproc.cpp"
 #include "compile.cpp"
+#include "assembler.cpp"

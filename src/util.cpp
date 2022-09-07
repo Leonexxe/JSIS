@@ -11,7 +11,7 @@
 #pragma once
 #include "master.h"
 
-#define TAB 11
+#define TAB '\t'
 
 bool strContains(char c,string& str)
 {
@@ -21,15 +21,34 @@ bool strContains(char c,string& str)
     return 0;
 }
 
+void reverse(string& str)
+{
+    std::reverse(str.begin(),str.end());
+}
+
+// trim from start (in place)
+static inline void ltrim(std::string &s) {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
+        return !std::isspace(ch);
+    }));
+}
+
+// trim from end (in place)
+static inline void rtrim(std::string &s) {
+    s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch) {
+        return !std::isspace(ch);
+    }).base(), s.end());
+}
+
+// trim from both ends (in place)
+static inline void trim(std::string &s) {
+    ltrim(s);
+    rtrim(s);
+}
+
 void strip(string& str)
 {
-    for(char I : str)
-    {
-        if(I == ' ' || I == '\n' || I == TAB)
-            str = str.substr(1,str.size()-1);
-        else
-            return;
-    }
+    trim(str);
 }
 
 void stripList(list<string>& l)
@@ -62,6 +81,7 @@ string preFormat(string& code)
     pre = strReplace(pre,"*  =","*=",nullptr,1);
     pre = strReplace(pre,"/  =","/=",nullptr,1);
     pre = strReplace(pre," /  / ","//",nullptr,1);
+    pre = strReplace(pre,"  =  "," = ",nullptr,1);
 
     bool hasSpace = 0;
     bool isStringLiteral = 0;
@@ -112,7 +132,7 @@ string preFormat(string& code)
     return r;
 }
 
-string fileGetContent(string file, bool pf = 1)
+string fileGetContent(string file, bool pf = f_Compile)
 {
     std::ifstream ifs(file);
     std::string content((std::istreambuf_iterator<char>(ifs) ),

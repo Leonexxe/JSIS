@@ -8,6 +8,7 @@
 # -----                                                                                                      #
 # You may not remove or alter this copyright header.                                                         #
 ############################################################################################################*/
+void showASM();
 #include "master.h"
 
 bool isInvalidChar(char c)
@@ -43,6 +44,14 @@ i64 parseFlags(int argc, char** argv)
                     return -1;
                 }
             }
+            else if(argv[I][1] == 'D')
+                f_Debug = true;
+            else if(argv[I][1] == 'V')
+                f_Verbose = true;
+            else if(argv[I][1] == 'A')
+                f_Assembly = true;
+            else if(string("-assembler") == argv[I])
+                f_Compile  = false;
         }
         else
         {
@@ -66,11 +75,39 @@ int main(int argc, char** argv)
 
     std::cout << "[INFO] running preprocessor..." << std::endl;
     PPfileStack.push_back(inputFile);
+    currentFile = inputFile;
     preproc(&code,initCode);
     std::cout << "[INFO] placing in preprocessor variables..." << std::endl;
     string fCode = placePPvars(code);
     std::cout << "final code " << std::endl << fCode << std::endl;
-    std::cout << "running compiler..." << std::endl;
-    u64* INSTR = compile(fCode);
+    if(f_Compile)
+    {
+        std::cout << "running compiler..." << std::endl;
+        compile(fCode);
+    }
+    else
+    {
+        std::cout << "running assembler..." << std::endl;
+        goto assOnly;
+    }
+
+    std::cout << "generated assembly code:" << std::endl << assembly << std::endl;
+
+    if(!f_Assembly)
+        assemble();
+    else
+        writeAsm();
+    goto end;
+    assOnly: ;
+    assembly=fCode;
+    assemble();
+
+    end: ;
     return 0;
+}
+
+void showASM()
+{
+    std::cout << "generated assembly code:" << std::endl << assembly << std::endl;
+    exit(1);
 }

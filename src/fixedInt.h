@@ -12,3 +12,5 @@
 
 typedef unsigned long long u64;
 typedef long long i64;
+typedef char i8;
+typedef unsigned char u8;

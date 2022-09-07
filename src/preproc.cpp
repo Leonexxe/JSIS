@@ -75,6 +75,7 @@ void preProcLine(string* fc, string line)
             }
             PPfileStack.push_back(tokens[1].substr(1,tokens[1].size()-3));
             preproc(fc,fileGetContent("./"+tokens[1].substr(1,tokens[1].size()-3)));
+            fc->append("//@file "+PPfileStack.back()+";\n");
             std::cout << "continuing preprocessing on file: " << PPfileStack.back() << std::endl;
         }
         else
@@ -88,6 +89,7 @@ void preProcLine(string* fc, string line)
 void preproc(std::string* fc, string code)
 {
     std::cout << "[INFO] preprocessing file: " << PPfileStack.back() << std::endl;
+    fc->append("//@file "+PPfileStack.back()+";\n");
     list<string> lines = strSplit(code,";",1,0);
     for(string I : lines)
         preProcLine(fc,I);

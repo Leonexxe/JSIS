@@ -9,3 +9,7 @@
 # You may not remove or alter this copyright header.                                                         #
 ############################################################################################################*/
 #pragma once
+bool f_Debug = 0;
+bool f_Verbose = 0;
+bool f_Assembly = 0;
+bool f_Compile = 1;
